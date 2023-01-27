@@ -1,0 +1,41 @@
+﻿@using Home.ViewModels.Common
+@model SignInRequest
+@{
+    ViewData["Title"] = "Home";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<title>Home</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/scss/music.scss">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div class="big-div">                     
+        <div id="clock"></div>
+        <div id="calendar"></div>
+        <form class=" col-2" id="login-form" asp-controller="SignIn" asp-action="Index" method="post" >
+            
+            <input asp-for="UserName" type="hidden" value="null" class="form-control"  placeholder="Username">                                                
+            <input asp-for="Password" type="password" id="login-item" placeholder="Password"> 
+             
+            <div id="login-item">
+                <button type="submit" class="btn btn-dark">Start!</button>
+            </div>
+            
+        </form>
+        @if (true)
+        {
+            <span class="text-danger">@Model.Error</span>
+        }
+        @*<div asp-validation-summary="All" class="text-info"></div>*@
+    </div>
+</body>
+</html>
+
+<script src="/js/bootstrap.js"></script>
+<script src="/js/clock.js"></script>
+<script src="/js/music.js"></script>

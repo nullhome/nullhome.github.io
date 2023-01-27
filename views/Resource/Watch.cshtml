@@ -1,0 +1,368 @@
+﻿@using Home.Models.Common
+@model WatchAnimeViewModel
+
+@{
+    ViewData["Title"] = Model.Res.ResourceName;
+    Layout = "~/Views/Shared/Layouts/Base/_BaseLayout.cshtml";
+}
+<div class="go-to">    
+    <a class="go-to-btn go-to-top" href="#top-page"><span class="material-symbols-outlined">arrow_upward</span></a>
+    <a class="go-to-btn go-to-bottom" href="#bottom-page"><span class="material-symbols-outlined">arrow_downward</span></a>
+</div>
+@if (Model.CurrentType != SystemConstants.ResourceTypeName.manga && Model.CurrentType != SystemConstants.ResourceTypeName.manga_r18)
+{
+    <div class="content__container-detail">
+        @*<a class="container__header">@Model.Resource.ResourceName</a>*@
+
+        @*<hr class="separate">*@
+        <br>
+        <div class="container__body">
+
+            <div class="item-container-detail">
+                <div class="item-border-detail">
+                    @if (Model.Res != null)
+                    {
+                        var url = "";
+                        @if (Model.Res.Episode > 0)
+                        {
+                            url = Model.Res.ListEpisode[int.Parse(Model.PlayingItem) - 1];
+                        }
+                        
+                        
+                        <span id="bottom-page" style="visibility:hidden;"></span>
+                        <div class="item-watch">
+                            <video class="video-player" playsinline controls autoplay data-poster="">
+                                <source src="@url" type="video/mp4" />
+                                <source src="@url" type="video/ts" />
+                            </video>                        
+                            <div class="watch-list-ep">
+                                <div class="list-ep">
+                                    <span class="list-ep-title">List Episode</span>
+                                    <div class="h-100 d-flex align-items-center">
+                                        @if (Model.Res.Episode > 2 && int.Parse(Model.PlayingItem) > 1)
+                                        {
+                                            <a href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(int.Parse(Model.PlayingItem)-1)" class="episode-playing">Previous</a>
+                                        }
+                                        @if (Model.Res.Episode > 2 && int.Parse(Model.PlayingItem) < Model.Res.Episode)
+                                        {
+                                            <a href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(int.Parse(Model.PlayingItem)+1)" class="episode-playing">Next</a>
+                                        }
+                                        @*<i class="bi bi-lightbulb-off-fill light"></i>*@
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="list-episode-watch">
+                                    @for (int i = 0; i < Model.Res.Episode; i++)
+                                    {
+                                        
+                                        if (i == int.Parse(Model.PlayingItem) - 1)
+                                        {
+                                            if(Model.CurrentType.Contains(SystemConstants.ResourceTypeName.movie_r18)){
+                                                var tmpName = Model.Res.ListEpisode[i].Split("//")[4].Split(".")[0];
+                                                <a class="episode-playing">@tmpName</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="episode-playing">@(i + 1)</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Model.CurrentType.Contains(SystemConstants.ResourceTypeName.movie_r18))
+                                            {
+                                                
+                                                var tmpName = Model.Res.ListEpisode[i].Split("//")[4].Split(".")[0];
+                                                <a class="episode" href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(i+1)">@tmpName</a>
+                                            }
+                                            else
+                                            {
+
+                                                <a class="episode" href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(i+1)">@(i+1)</a>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-88 item-detail-info title-column">
+                            <div class="left-panel">
+                                <div class="item-detail-thumbnail">
+                                    <img src="@(Model.Res.ThumbnailLink)" />                                    
+                                    <span class="material-symbols-outlined info-btn">info</span>
+                                </div>
+                            </div>
+
+
+                            <div class="title-wrap-detail">
+                                <div class="item-title-detail">
+                                    @Model.Res.ResourceName
+                                </div>
+                                <hr class="separate-title">
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Collection:&emsp;
+                                    </span>
+                                    <a href="/@Model.CurrentType/collection/@Model.Res.Collection" class="tag-link">@Model.Res.Collection.Replace("-"," ")</a>
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Artist:&emsp;
+                                    </span>
+                                    <a href="/@Model.CurrentType/artist/@Model.Res.Artist" class="tag-link">@Model.Res.Artist.Replace("-"," ")</a>
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Tag:&emsp;
+                                    </span>
+                                    @*@foreach (var tag in Model.Resource.LTagVm)
+                                    {
+                                        <a href="/@Model.CurrentType/tag/@tag.TagID" class="tag-link">@tag.TagName</a>
+                                    }*@
+
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Rating:&emsp;
+                                    </span>
+                                    <span class=""></span>
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Episode:&emsp;
+                                    </span>
+                                    @if (Model.Res.Episode == 1)
+                                    {
+                                        <span class="">Oneshot</span>
+                                    }
+                                    @if (Model.Res.Episode > 1)
+                                    {
+                                        <span class="">@Model.Res.Episode</span>
+
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <span id="top-page" style="visibility:hidden;"></span>
+
+                        <div class="w-88 item-detail-info ">
+                            <div class="container__body">
+                                @if (Model.LRes != null && Model.LRes.Count() > 0)
+                                {
+                                    @foreach (var resource in Model.LRes)
+                                    {
+                                        <div class="item-container">
+                                            <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1#bottom-page" class="item-border">
+                                                <div class="item">
+                                                    <div class="item-thumbnail">
+                                                        <div class="item-img" style="background-image:url('@Url.Content(resource.ThumbnailLink)')"></div>
+                                                        <span class="item-rate">
+                                                            <span></span>
+                                                            <span class="material-symbols-outlined icon-star">star_rate</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="title-wrap">
+                                                        <div class="item-title">@resource.ResourceName</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1"><span class="material-symbols-outlined item-play">play_arrow</span></a>
+
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>                       
+
+                    }  
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.CurrentType == SystemConstants.ResourceTypeName.manga || Model.CurrentType == SystemConstants.ResourceTypeName.manga_r18)
+{
+    <div class="content__container-detail-manga">
+        <span id="top-page" style="visibility:hidden;"></span>
+        @*<a class="container__header">@Model.Resource.ResourceName</a>
+
+        <hr class="separate">
+    <br>*@
+        <div class="container__body">
+
+            <div class="item-container-detail">
+
+                <div class="item-border-detail mb-2 upside-down">
+                    @if (Model.Res != null)
+                    {
+
+                        @if (Model.LRes != null && Model.LRes.Count > 0){
+                            <div class="w-88 item-detail-info ">
+                                <div class="container__body">
+
+                                    
+                                    @foreach (var resource in Model.LRes)
+                                    {
+                                        <div class="item-container related-item">
+
+                                            <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1#bottom-page" class="item-border">
+                                                <div class="item">
+                                                    <div class="item-thumbnail">
+                                                        <div class="item-img" style="background-image:url('@Url.Content(resource.ThumbnailLink)')"></div>
+                                                        <span class="item-rate">
+                                                            <span></span>
+                                                            <span class="material-symbols-outlined icon-star">star_rate</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="title-wrap">
+                                                        <div class="item-title">@resource.ResourceName</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1"><span class="material-symbols-outlined item-play">play_arrow</span></a>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                            <div class="item-title-detail">Related</div>
+                        }
+                        <div class="w-88 item-detail-info title-column">
+                            <span id="bottom-page" style="visibility:hidden;"></span>
+                            <div class="left-panel">
+                                <div class="item-detail-thumbnail">
+                                    <img src="@(Model.Res.ThumbnailLink)" />
+                                    <span class="material-symbols-outlined info-btn">info</span>
+                                </div>
+                            </div>
+
+
+                            <div class="title-wrap-detail">
+                                <div class="d-flex flex-row">                                    
+                                    <div class="item-title-detail">@Model.Res.ResourceName</div>
+                                </div>
+                                <hr class="separate-title">
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Collection:&emsp;
+                                    </span>
+                                    <a href="/@Model.CurrentType/collection/@Model.Res.Collection" class="tag-link">@Model.Res.Collection</a>
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Artist:&emsp;
+                                    </span>
+                                    <a href="/@Model.CurrentType/artist/@Model.Res.Artist" class="tag-link">@Model.Res.Artist</a>
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Tag:&emsp;
+                                    </span>
+                                    @*@foreach (var tag in Model.Resource.LTagVm)
+                                    {
+                                        <a href="/@Model.CurrentType/tag/@tag.TagID" class="tag-link">@tag.TagName</a>
+                                    }*@
+
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Rating:&emsp;
+                                    </span>
+                                    <span class=""></span>
+                                </div>
+                                <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Episode:&emsp;
+                                    </span>
+                                    @if (Model.Res.Episode == 1)
+                                    {
+                                        <span class="">Oneshot</span>
+                                    }
+                                    @if (Model.Res.Episode > 1)
+                                    {
+                                        <span class="">@Model.Res.Episode</span>
+                                    }
+                                </div>
+
+                               @* <div class="info-container">
+                                    <span class="info-title">
+                                        <span class="material-symbols-outlined">workspace_premium</span>&ensp;Description:&emsp;
+                                    </span>
+                                    <span class="">@Model.Resource.Description</span>
+                                </div>*@
+
+                            </div>
+                        </div>
+                        <div class="watch-list-ep mt-2" style="z-index:5;">
+                            <div class="list-ep">
+                                <span class="list-ep-title">List Episode</span>
+                                <div class="h-100 d-flex align-items-center">
+                                    @if (Model.Res.Episode > 1 && int.Parse(Model.PlayingItem) > 1)
+                                    {
+                                        <a href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(int.Parse(Model.PlayingItem)-1)" class="episode-playing">Previous</a>
+                                    }
+                                    @if (Model.Res.Episode > 1 && int.Parse(Model.PlayingItem) < Model.Res.Episode)
+                                    {
+                                        <a href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(int.Parse(Model.PlayingItem)+1)" class="episode-playing">Next</a>
+                                    }
+                                    @*<i class="bi bi-lightbulb-off-fill light"></i>*@
+                                </div>
+                            </div>
+
+                            <div class="list-episode-watch">
+                                @for (int i = 0; i < Model.Res.Episode; i++)
+                                {
+                                    if (i == int.Parse(Model.PlayingItem) - 1)
+                                    {
+                                        <a class="episode-playing">@(i + 1)</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="episode" href="/@Model.CurrentType/watch/@Model.Res.ResourceID/@(i+1)">@(i + 1)</a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="item-watch">
+                            <div class="btns d-flex" id="nextImg" style="position: absolute; z-index: 10; height: 55%; width: 100%; top: 0; left: 0;"></div>
+                            <div class="btns d-flex" id="previousImg" style="position: absolute; z-index: 10; height: 45%; width: 100%; bottom:0; left: 0;"></div>
+                            <div class="manga-img" >
+                                
+                                @*@foreach (var item in Model.Res.ListChap[int.Parse(Model.PlayingItem) - 1]){
+
+                                    <img src="@item" />
+                                }*@
+
+                                <div class="img-wrapper h-100 w-100 overflow-auto " style="z-index:3;" id="image-wrapper">
+                                    @if (true)
+                                    {
+                                        var crrep = Model.Res.ListChap[int.Parse(Model.PlayingItem) - 1];
+                                        <div class="h-100 w-100 " style="z-index:0;">
+
+                                            <img id="img-id-0" src="@crrep[0]" class="position-absolute" style="opacity:100;z-index:0;height:100%" />
+                                            @for (var i = 1; i < crrep.Count(); i++)
+                                            {
+
+                                                <img id="img-id-@i" src="@crrep[i]" class="position-absolute " style="opacity:0;z-index:0;height:100%" />
+
+                                            }
+                                        </div>
+                                    }
+                                    
+                                </div>      
+
+                            </div>                            
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

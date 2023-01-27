@@ -1,0 +1,83 @@
+﻿@model ResourcePagingViewModel
+@using Home.WebApp.Models
+
+@{
+    ViewData["Title"] = Model.ResourceModel.TitlePage;
+    Layout = "~/Views/Shared/Layouts/Base/_BaseLayout.cshtml";
+}
+
+
+
+<div class="content__container">
+    <div class="container__header">
+        <div>
+            @Model.ResourceModel.TitlePage
+        </div>
+        
+    </div>
+    <hr class="separate">
+    <div class="container__body">
+        @foreach (var resource in Model.ResourceModel.LResource)
+        {
+            <div class="item-container">
+
+                <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1#bottom-page" class="item-border">
+                    <div class="item">
+                        <div class="item-thumbnail">
+                            <div class="item-img" style="background-image:url('@Url.Content(resource.ThumbnailLink)')"></div>
+                            <span class="item-rate">
+                                <span></span>
+                                <span class="material-symbols-outlined icon-star">star_rate</span>
+                            </span>
+                        </div>
+                        <div class="title-wrap">
+                            <div class="item-title">@resource.ResourceName</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1"><span class="material-symbols-outlined item-play">play_arrow</span></a>
+
+            </div>
+        }
+    </div>
+</div>
+<div class="content__container pager-bar">
+    @await Component.InvokeAsync("Pager", Model.ResourceModel)
+</div>
+
+@*<div class="content__container">
+    <div class="container__header">
+        <div>
+            @Model.PResource.TitlePage
+        </div>
+
+    </div>
+    <hr class="separate">
+    <div class="container__body">
+        @foreach (var resource in Model.PResource.LResource)
+        {
+            <div class="item-container">
+
+                <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1#bottom-page" class="item-border">
+                    <div class="item">
+                        <div class="item-thumbnail">
+                            <div class="item-img" style="background-image:url('@Url.Content(resource.Link +resource.Thumbnail)')"></div>
+                            <span class="item-rate">
+                                <span>@resource.Rating</span>
+                                <span class="material-symbols-outlined icon-star">star_rate</span>
+                            </span>
+                        </div>
+                        <div class="title-wrap">
+                            <div class="item-title">@resource.ResourceName</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/@(Model.CurrentType+"/watch/"+resource.ResourceID)/1"><span class="material-symbols-outlined item-play">play_arrow</span></a>
+
+            </div>
+        }
+    </div>
+</div>
+<div class="content__container pager-bar">
+    @await Component.InvokeAsync("Pager", Model.PResource)
+</div>*@

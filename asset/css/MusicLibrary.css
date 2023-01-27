@@ -1,0 +1,636 @@
+/*Css for all ratio*/
+.main {
+    height: 100%;
+    background: url('/img/background.png') center no-repeat;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -moz-user-select: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+.main__top-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    height: 10%;
+    width: 100%;
+    z-index: 100;
+    background: linear-gradient(to bottom,rgb(0,0,0,1),rgb(0,0,0,0.6),rgb(0,0,0,0.01));
+}
+
+.top-menu__title {
+    font-family: 'UTM Androgyne';
+    font-size: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.date-time__clock {
+    text-align: center;
+    font-family: New Rocker;
+    font-size: 45px;
+    line-height: 45px;
+}
+
+.date-time__calendar {
+    text-align: center;
+    font-family: New Rocker;
+    font-size: 20px;
+}
+
+.top-menu__btn-menu, .top-menu__btn-queue, .top-menu__back-forward {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+}
+.top-menu__date-time {
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.top-menu__back-forward {
+    justify-content: flex-start;
+}
+.top-menu__btn-menu span, .top-menu__btn-queue span, .top-menu__back-forward span {
+    font-size: 40pt;
+}
+
+.main__menu-sidebar, .main__queue-sidebar {
+    visibility:hidden;
+    opacity:0;
+    height: 100%;
+    top: 0;
+    position: fixed;
+    transition: visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
+}
+.main__menu-sidebar {
+    left: 0;
+    background: linear-gradient(to right,rgb(0,0,0,1),rgb(0,0,0,0.7),rgb(0,0,0,0.03));
+}
+.menu-sidebar__menu{
+    width:100%;
+    height:75%;
+    position:absolute;
+    top:10%;
+}
+.sidebar-header {
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+    font-size: 30px;
+    font-family: 'UTM Androgyne';
+    font-weight: 400;
+    margin: 10px 0px;
+}
+.menu__content{
+    width:98%;
+    height:90%;
+    position:absolute;
+    top:63px;
+    display:block;
+    overflow:auto;
+}
+/* width */
+    .menu__content::-webkit-scrollbar {
+        width: 5px;
+    }
+
+/* Track */
+    .menu__content::-webkit-scrollbar-track {
+        background: black;
+    }
+
+/* Handle */
+    .menu__content::-webkit-scrollbar-thumb {
+        background: #aeaeaeae;
+    }
+
+/* Handle on hover */
+    .menu__content::-webkit-scrollbar-thumb:hover {
+        background: #fff;
+    }
+
+.content__item {
+    height: 45px;
+    width: 96%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between
+}
+
+.item__link {
+    width: 80%;
+    height: 45px;
+    line-height: 45px;
+    font-family: 'UTM Androgyne';
+    text-decoration: none;
+    color: #eaeaea;
+    cursor: default;
+    transition: background 0.25s ease-in-out;
+}
+.link__icon {
+    padding-left: 15px;
+    font-size:27px
+}
+.link__name {
+    padding-left: 15px;
+    font-size: 22px;
+}
+.item__btn-expand {
+    font-size: 35px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 20px;
+    transition: background 0.25s ease-in-out,transform 0.25s ease-in-out;
+}
+
+.content__expand {
+    padding-left: 30px;
+    overflow: hidden;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: max-height 0.3s ease-in-out;
+}
+.expand__expand-item {
+    height: 45px;
+    line-height: 45px;
+    width: fit-content;
+    text-decoration: none;
+    color: #eaeaea;
+    cursor: default;
+    padding-left: 10px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    transition:color 0.15s ease;
+}
+.expand-item__icon {
+    font-size: 25px;
+}
+.expand-item__name {
+    font-size: 18px;
+    padding-left: 10px;
+    font-family: Cambria;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.main__queue-sidebar {
+    right: 0;
+    background: linear-gradient(to left,rgb(0,0,0,1),rgb(0,0,0,0.7),rgb(0,0,0,0.03));
+}
+.queue-sidebar__queue {
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    top: 10%;
+}
+.queue__content {
+    width: 97%;
+    height: 89%;
+    position: absolute;
+    top: 67px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding-left: 10px;
+}
+    /* width */
+    .queue__content::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    .queue__content::-webkit-scrollbar-track {
+        background: black;
+    }
+
+    /* Handle */
+    .queue__content::-webkit-scrollbar-thumb {
+        background: #aeaeaeae;
+    }
+
+    /* Handle on hover */
+    .queue__content::-webkit-scrollbar-thumb:hover {
+        background: #fff;
+    }
+.content__playlist-item {
+    width: 98%;
+    height: 55px;
+    margin-bottom: 5px;
+    padding: 5px 0px 5px 0px;
+    background: linear-gradient(to right,#ffffff49,rgba(0,0,0,0));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: background 0.3s linear;
+}
+.content__playlist-item--active {
+    background: linear-gradient(to right,#00bb77,rgba(0,0,0,0));
+    border-right:solid 3px #00ffd879;
+}
+.playlist-item__info {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 5px;
+    width: 70%;
+}
+.info__song-name {
+    height: 25px;
+    width:100%;
+    font-family: Cambria;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.info__artist-name {
+    font-family: Tahoma;
+    padding-left: 10px;
+    font-size: 15px;
+    transition: text-decoration 0.15s ease-in-out,color 0.15s ease-in-out;
+}
+.playlist-item__thumbnail {
+    height: 100%;
+    padding-left: 5px;
+}
+.main__audio-player {
+    position: fixed;
+    bottom: 0;
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to top,rgb(0,0,0,1),rgb(0,0,0,0.7),rgb(0,0,0,0));
+}
+
+.audio-player__song-name{
+    font-family:'UTM Androgyne';
+    font-size:22px;
+}
+.audio-player__control{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+.control__btn-shuffle, .control__btn-repeat {
+    font-size: 30px;
+    margin: 0px 10px;
+}
+.control__btn-next, .control__btn-previous {
+    font-size: 35px;
+    margin: 0px 10px;
+}
+.control__btn-play {
+    font-size: 55px;
+    margin: 0px 10px;
+}
+
+.audio-player__progress{
+    height:30px;
+    display:flex;
+    align-items:flex-start;
+}
+.progress__bar{
+    width:400px;
+    margin:0px 15px;
+}
+.progress__time{
+    font-family:Tahoma;
+    font-size:14px;
+}
+
+
+.main__page-content{
+    position:absolute;
+    top:10%;
+    height:75%;
+    width:70%;
+    display:block;
+    flex-direction:column;
+    justify-content:flex-start;
+    background:#125e4273;
+}
+
+
+
+
+
+
+
+
+
+
+.item__link:hover {
+    background: linear-gradient(to right,#00FFFF60,rgba(0,0,0,0));
+}
+.expand__expand-item:hover {
+    color: #00FFFFd0;
+}
+.btn-menu__css-hover:hover {
+    color: #00FFFFc0;
+    font-size: 70px;
+}
+.btn-menu__css-hover {
+    transition: color 0.15s ease,font-size 0.15s ease;
+}
+
+.item__btn-expand:hover {
+    background: linear-gradient(to top,#00FFFF60,rgba(0,0,0,0));
+}
+
+.info__artist-name:hover{
+    text-decoration:underline;
+    color:#00FFFF60;
+}
+
+.content__playlist-item:hover {
+    background: linear-gradient(to right,#00FFFF60,rgba(0,0,0,0));
+}
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------------*/
+/*Css for landscape ratio*/
+@media screen and (min-aspect-ratio:13/9) {
+    .main__menu-sidebar, .main__queue-sidebar {
+        width: 15%;
+    }
+    .main__bottom-bar {
+        display: none;
+    }
+    .main__playing-bar {
+        display: none;
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------*/
+/*Css for square ratio*/
+@media screen and (max-aspect-ratio:13/9) and (min-aspect-ratio:6/9) {
+    .main__menu-sidebar, .main__queue-sidebar {
+        width: 25%;
+    }
+
+    .main__bottom-bar {
+        display: none;
+    }
+
+    .main__playing-bar {
+        display: none;
+    }
+}
+/*------------------------------------------------------------------------------------------------------------------------------*/
+/*Css for potrait ratio*/
+@media screen and (max-aspect-ratio:6/9) {
+    .main__top-menu {
+        justify-content: center;
+        height: 7%;
+        visibility: hidden;
+    }
+    .top-menu__title {
+        font-family: 'New Rocker';
+        font-size: 38px;
+    }    
+
+    .top-menu__btn-menu, .top-menu__btn-queue, .top-menu__date-time, .top-menu__back-forward {
+        display: none;
+    }
+    .main__menu-sidebar, .main__queue-sidebar {
+        padding-left: 2%;
+        padding-right: 2%;
+        width: 96%;
+        height: 86%;
+    }
+    .menu-sidebar__menu, .queue-sidebar__queue{
+        top:0;
+        z-index:100;
+        width:100%;
+        height:100%;
+        padding:0;
+        margin:0;
+    }
+    .queue__content{
+        width:98%;
+        padding:0;
+    }
+    .main__audio-player {
+        display: none;
+    }
+
+    .main__playing-bar {
+        padding:2%;
+        position: fixed;
+        bottom: 6%;
+        height: 7%;
+        width:96%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items:center;
+        background: #bd6d6d91
+        
+    }
+
+    .playing-bar__song-thumbnail {
+        height: 100%;
+        width: auto;
+    }
+    .playing-bar__song-info {
+        height: 100%;
+        width: 100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        padding-left:10px;
+    }
+    .song-info__song-name {
+        font-family: 'UTM Androgyne';
+        height: 55%;
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 90%;
+    }
+    .song-info__artist-name {
+        font-family: Tahoma;
+        font-size:14px;
+        padding-left:10px;
+    }
+    .playing-bar__control {
+        height: 50px;
+        font-size:50px;
+        padding-right:1.5%;
+    }
+    .main__bottom-bar {
+        height: 6%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        background: #72c83e87;
+    }
+    .main__bottom-bar span {
+        font-size: 30px;
+        height: 50px;
+        width: 50px;
+        display: block;
+        line-height:50px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+  8. Animations
+*/
+.slide-in-top {
+    -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2019-3-25 18:39:54
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+/**
+ * ----------------------------------------
+ * animation slide-in-top
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-top {
+    0% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-top {
+    0% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-out-top {
+    -webkit-animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+    animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2019-3-25 18:45:17
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+/**
+ * ----------------------------------------
+ * animation slide-out-top
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
+
+/*# sourceMappingURL=app.css.map */
+
+a.more-on-ssu {
+    background-color: white;
+    color: #CC5CAD;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    max-width: 300px;
+    border-radius: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
